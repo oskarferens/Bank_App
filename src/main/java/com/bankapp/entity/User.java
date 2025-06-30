@@ -1,8 +1,7 @@
 package com.bankapp.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -10,16 +9,35 @@ import java.util.Set;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String username; // login/email
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(unique = true, nullable = false, length = 11)
+    private String pesel;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    private String address;
+
+    private String city;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
